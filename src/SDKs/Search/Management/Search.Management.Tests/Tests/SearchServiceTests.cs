@@ -377,6 +377,7 @@ namespace Microsoft.Azure.Management.Search.Tests
             service = searchMgmt.Services.BeginCreateOrUpdate(Data.ResourceGroupName, serviceName, service);
             Assert.NotNull(service);
 
+            
             return service;
         }
 

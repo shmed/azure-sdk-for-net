@@ -8,7 +8,13 @@ namespace Microsoft.Azure.Search.Tests.Utilities
     using System.Linq;
     using System.Net.Http;
     using System.Threading;
+    using Microsoft.Azure.KeyVault;
+    using Microsoft.Azure.Management.KeyVault;
+    using Microsoft.Azure.Management.KeyVault.Models;
+    using Microsoft.Azure.Management.ResourceManager;
+    using Microsoft.Azure.Search.Models;
     using Microsoft.Azure.Test.HttpRecorder;
+    using Microsoft.Rest;
     using Microsoft.Rest.ClientRuntime.Azure.TestFramework;
 
     public static class SearchTestUtilities
