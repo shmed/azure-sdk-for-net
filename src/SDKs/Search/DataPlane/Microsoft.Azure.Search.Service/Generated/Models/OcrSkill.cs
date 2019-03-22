@@ -35,25 +35,28 @@ namespace Microsoft.Azure.Search.Models
         /// <summary>
         /// Initializes a new instance of the OcrSkill class.
         /// </summary>
-        /// <param name="description">The description of the skill which
-        /// describes the inputs, outputs, and usage of the skill.</param>
-        /// <param name="context">Represents the level at which operations take
-        /// place, such as the document root or document content (for example,
-        /// /document or /document/content).</param>
         /// <param name="inputs">Inputs of the skills could be a column in the
         /// source data set, or the output of an upstream skill.</param>
         /// <param name="outputs">The output of a skill is either a field in an
         /// Azure Search index, or a value that can be consumed as an input by
         /// another skill.</param>
+        /// <param name="description">The description of the skill which
+        /// describes the inputs, outputs, and usage of the skill.</param>
+        /// <param name="context">Represents the level at which operations take
+        /// place, such as the document root or document content (for example,
+        /// /document or /document/content). The default is /document.</param>
         /// <param name="textExtractionAlgorithm">A value indicating which
         /// algorithm to use for extracting text. Default is printed. Possible
         /// values include: 'printed', 'handwritten'</param>
         /// <param name="defaultLanguageCode">A value indicating which language
-        /// code to use. Default is en.</param>
+        /// code to use. Default is en. Possible values include: 'zh-Hans',
+        /// 'zh-Hant', 'cs', 'da', 'nl', 'en', 'fi', 'fr', 'de', 'el', 'hu',
+        /// 'it', 'ja', 'ko', 'nb', 'pl', 'pt', 'ru', 'es', 'sv', 'tr', 'ar',
+        /// 'ro', 'sr-Cyrl', 'sr-Latn', 'sk'</param>
         /// <param name="shouldDetectOrientation">A value indicating to turn
         /// orientation detection on or not. Default is false.</param>
-        public OcrSkill(string description, string context, IList<InputFieldMappingEntry> inputs, IList<OutputFieldMappingEntry> outputs, TextExtractionAlgorithm? textExtractionAlgorithm = default(TextExtractionAlgorithm?), OcrSkillLanguage defaultLanguageCode = default(OcrSkillLanguage), bool? shouldDetectOrientation = default(bool?))
-            : base(description, context, inputs, outputs)
+        public OcrSkill(IList<InputFieldMappingEntry> inputs, IList<OutputFieldMappingEntry> outputs, string description = default(string), string context = default(string), TextExtractionAlgorithm? textExtractionAlgorithm = default(TextExtractionAlgorithm?), OcrSkillLanguage? defaultLanguageCode = default(OcrSkillLanguage?), bool? shouldDetectOrientation = default(bool?))
+            : base(inputs, outputs, description, context)
         {
             TextExtractionAlgorithm = textExtractionAlgorithm;
             DefaultLanguageCode = defaultLanguageCode;
@@ -76,10 +79,13 @@ namespace Microsoft.Azure.Search.Models
 
         /// <summary>
         /// Gets or sets a value indicating which language code to use. Default
-        /// is en.
+        /// is en. Possible values include: 'zh-Hans', 'zh-Hant', 'cs', 'da',
+        /// 'nl', 'en', 'fi', 'fr', 'de', 'el', 'hu', 'it', 'ja', 'ko', 'nb',
+        /// 'pl', 'pt', 'ru', 'es', 'sv', 'tr', 'ar', 'ro', 'sr-Cyrl',
+        /// 'sr-Latn', 'sk'
         /// </summary>
         [JsonProperty(PropertyName = "defaultLanguageCode")]
-        public OcrSkillLanguage DefaultLanguageCode { get; set; }
+        public OcrSkillLanguage? DefaultLanguageCode { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating to turn orientation detection on or

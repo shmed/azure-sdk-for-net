@@ -31,22 +31,26 @@ namespace Microsoft.Azure.Search.Models
         /// Initializes a new instance of the SynonymMap class.
         /// </summary>
         /// <param name="name">The name of the synonym map.</param>
-        /// <param name="format">The format of the synonym map. Only the 'solr'
-        /// format is currently supported.</param>
         /// <param name="synonyms">A series of synonym rules in the specified
         /// synonym map format. The rules must be separated by
         /// newlines.</param>
         /// <param name="encryptionKey">Encryption key used to encrypt the
         /// synonym map.</param>
         /// <param name="eTag">The ETag of the synonym map.</param>
-        public SynonymMap(string name, SynonymMapFormat format, string synonyms, EncryptionKey encryptionKey = default(EncryptionKey), string eTag = default(string))
+        public SynonymMap(string name, string synonyms, EncryptionKey encryptionKey = default(EncryptionKey), string eTag = default(string))
         {
             Name = name;
-            Format = format;
             Synonyms = synonyms;
             EncryptionKey = encryptionKey;
             ETag = eTag;
             CustomInit();
+        }
+        /// <summary>
+        /// Static constructor for SynonymMap class.
+        /// </summary>
+        static SynonymMap()
+        {
+            Format = "solr";
         }
 
         /// <summary>
@@ -59,13 +63,6 @@ namespace Microsoft.Azure.Search.Models
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
-
-        /// <summary>
-        /// Gets or sets the format of the synonym map. Only the 'solr' format
-        /// is currently supported.
-        /// </summary>
-        [JsonProperty(PropertyName = "format")]
-        public SynonymMapFormat Format { get; set; }
 
         /// <summary>
         /// Gets or sets a series of synonym rules in the specified synonym map
@@ -87,6 +84,13 @@ namespace Microsoft.Azure.Search.Models
         public string ETag { get; set; }
 
         /// <summary>
+        /// The format of the synonym map. Only the 'solr' format is currently
+        /// supported.
+        /// </summary>
+        [JsonProperty(PropertyName = "format")]
+        public static string Format { get; private set; }
+
+        /// <summary>
         /// Validate the object.
         /// </summary>
         /// <exception cref="ValidationException">
@@ -97,10 +101,6 @@ namespace Microsoft.Azure.Search.Models
             if (Name == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "Name");
-            }
-            if (Format == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "Format");
             }
             if (Synonyms == null)
             {

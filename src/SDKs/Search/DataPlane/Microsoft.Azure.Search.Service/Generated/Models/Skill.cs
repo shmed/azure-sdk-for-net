@@ -35,17 +35,17 @@ namespace Microsoft.Azure.Search.Models
         /// <summary>
         /// Initializes a new instance of the Skill class.
         /// </summary>
-        /// <param name="description">The description of the skill which
-        /// describes the inputs, outputs, and usage of the skill.</param>
-        /// <param name="context">Represents the level at which operations take
-        /// place, such as the document root or document content (for example,
-        /// /document or /document/content).</param>
         /// <param name="inputs">Inputs of the skills could be a column in the
         /// source data set, or the output of an upstream skill.</param>
         /// <param name="outputs">The output of a skill is either a field in an
         /// Azure Search index, or a value that can be consumed as an input by
         /// another skill.</param>
-        public Skill(string description, string context, IList<InputFieldMappingEntry> inputs, IList<OutputFieldMappingEntry> outputs)
+        /// <param name="description">The description of the skill which
+        /// describes the inputs, outputs, and usage of the skill.</param>
+        /// <param name="context">Represents the level at which operations take
+        /// place, such as the document root or document content (for example,
+        /// /document or /document/content). The default is /document.</param>
+        public Skill(IList<InputFieldMappingEntry> inputs, IList<OutputFieldMappingEntry> outputs, string description = default(string), string context = default(string))
         {
             Description = description;
             Context = context;
@@ -69,7 +69,7 @@ namespace Microsoft.Azure.Search.Models
         /// <summary>
         /// Gets or sets represents the level at which operations take place,
         /// such as the document root or document content (for example,
-        /// /document or /document/content).
+        /// /document or /document/content). The default is /document.
         /// </summary>
         [JsonProperty(PropertyName = "context")]
         public string Context { get; set; }
@@ -97,14 +97,6 @@ namespace Microsoft.Azure.Search.Models
         /// </exception>
         public virtual void Validate()
         {
-            if (Description == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "Description");
-            }
-            if (Context == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "Context");
-            }
             if (Inputs == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "Inputs");

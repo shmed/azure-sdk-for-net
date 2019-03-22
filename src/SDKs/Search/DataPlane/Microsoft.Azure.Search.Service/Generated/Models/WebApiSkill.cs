@@ -37,11 +37,6 @@ namespace Microsoft.Azure.Search.Models
         /// <summary>
         /// Initializes a new instance of the WebApiSkill class.
         /// </summary>
-        /// <param name="description">The description of the skill which
-        /// describes the inputs, outputs, and usage of the skill.</param>
-        /// <param name="context">Represents the level at which operations take
-        /// place, such as the document root or document content (for example,
-        /// /document or /document/content).</param>
         /// <param name="inputs">Inputs of the skills could be a column in the
         /// source data set, or the output of an upstream skill.</param>
         /// <param name="outputs">The output of a skill is either a field in an
@@ -51,12 +46,17 @@ namespace Microsoft.Azure.Search.Models
         /// <param name="httpHeaders">The headers required to make the http
         /// request.</param>
         /// <param name="httpMethod">The method for the http request.</param>
+        /// <param name="description">The description of the skill which
+        /// describes the inputs, outputs, and usage of the skill.</param>
+        /// <param name="context">Represents the level at which operations take
+        /// place, such as the document root or document content (for example,
+        /// /document or /document/content). The default is /document.</param>
         /// <param name="timeout">The desired timeout for the request. Default
         /// is 30 seconds.</param>
         /// <param name="batchSize">The desired batch size which indicates
         /// number of documents.</param>
-        public WebApiSkill(string description, string context, IList<InputFieldMappingEntry> inputs, IList<OutputFieldMappingEntry> outputs, string uri, WebApiHttpHeaders httpHeaders, string httpMethod, System.TimeSpan? timeout = default(System.TimeSpan?), int? batchSize = default(int?))
-            : base(description, context, inputs, outputs)
+        public WebApiSkill(IList<InputFieldMappingEntry> inputs, IList<OutputFieldMappingEntry> outputs, string uri, WebApiHttpHeaders httpHeaders, string httpMethod, string description = default(string), string context = default(string), System.TimeSpan? timeout = default(System.TimeSpan?), int? batchSize = default(int?))
+            : base(inputs, outputs, description, context)
         {
             Uri = uri;
             HttpHeaders = httpHeaders;
