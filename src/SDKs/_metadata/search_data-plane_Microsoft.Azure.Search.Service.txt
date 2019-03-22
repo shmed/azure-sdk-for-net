@@ -4,11 +4,11 @@ Commencing code generation
 Generating CSharp code
 Executing AutoRest command
 cmd.exe /c autorest.cmd https://github.com/shmed/azure-rest-api-specs/blob/ramero/encryption/specification/search/data-plane/Microsoft.Azure.Search.Service/readme.md --csharp --version=latest --reflect-api-versions --csharp-sdks-folder=D:\csi\sdk\azure-sdk-for-net\src\SDKs
-2019-03-22 18:31:19 UTC
+2019-03-22 20:19:11 UTC
 Azure-rest-api-specs repository information
 GitHub fork: shmed
 Branch:      ramero/encryption
-Commit:      c61cf143262183b53e388bae83ef6534875bb019
+Commit:      10b35e8200baed1e3fe6f5013051620801458125
 AutoRest information
 Requested version: latest
 Bootstrapper version:    autorest@2.0.4283
